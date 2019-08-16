@@ -13,7 +13,7 @@ class Proflie extends Model
 
     protected $fillable = ['id', 'user_id', 'name', 'address', 'phone', 'image'];
 
-    public function User()
+    public function user()
     {
     	return $this->belongsTo('App\User');
     }

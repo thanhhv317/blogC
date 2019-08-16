@@ -2,7 +2,7 @@
 @section('content')
     <div class="register-box">
       <div class="register-logo">
-        <a href="../../index2.html"><b>REGISTER</b>TBook</a>
+        <a href="../../index2.html"><b>REGISTER</b>Code</a>
       </div>
 
       <div class="register-box-body">
@@ -53,9 +53,9 @@
         </form>
 
         <div class="social-auth-links text-center">
-          <!-- <p>- OR -</p>
+          <p>- OR -</p>
           <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a> -->
+          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
         </div>
 
         <a href="{!! route('login') !!}" class="text-center">I already have a membership</a>

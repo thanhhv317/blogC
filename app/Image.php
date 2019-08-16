@@ -10,9 +10,10 @@ class Image extends Model
     use SoftDeletes;
 
     protected $table = 'images';
-    protected $fillable = ['id', 'post_id'. 'image'];
+    
+    protected $fillable = ['id', 'post_id', 'image'];
 
-    public function Post()
+    public function post()
     {
     	return $this->belongsTo('App\Post');
     }

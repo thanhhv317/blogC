@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::group(['prefix' => 'author', function() {
+	Route::group(['prefix' => 'post'], function() {
+		Route::get('/', ['as' => 'author.post', 'uses' => 'PostController@getPostList']);
+		
+	});
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -10,15 +10,21 @@ class Post extends Model
     use SoftDeletes;
 
     protected $table = 'posts';
-    protected $fillable = ['id', 'title' 'content' 'author_id'];
+    protected $fillable = ['id', 'title', 'content', 'author_id'];
 
-    public function Comment()
+    public function comment()
     {
     	return $this->hasMany('App\Comment');
     }
 
-    public function Image()
+    public function image()
     {
-    	return $this->hasMany('App\Image');
+    	return $this->hasMany('App\Image' );
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'id');
+    }
+
 }

@@ -12,7 +12,7 @@ class Comment extends Model
     protected $tablel = 'commets';
     protected $fillable = ['id', 'post_id' ,'content', 'user_name', 'user_email', 'status'];
     
-    public function Post()
+    public function post()
     {
     	return $this->belongsTo('App\Post');
     }

@@ -2,10 +2,10 @@
 @section('content')
     <div class="login-box">
       <div class="login-logo">
-        <a href=""><b>LOGIN</b>TBook</a>
+        <a href=""><b>LOGIN</b>Code</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Đăng nhập để mua sắm thuận tiện hơn</p>
+        <p class="login-box-msg">Đăng nhập để viết bài</p>
         <form action="{{ route('login') }}" method="post">
           @csrf
           <div class="form-group has-feedback">
@@ -28,7 +28,7 @@
           </div>
           <div class="row">
             <div class="col-xs-8">
-              <div class="checkbox icheck">
+              <div class="container checkbox icheck">
                 <label>
                   <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                 </label>
@@ -43,8 +43,8 @@
 
         <div class="social-auth-links text-center">
           <p>- OR -</p>
-          <!-- <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
-          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a> -->
+          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
+          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
         </div><!-- /.social-auth-links -->
 
          @if (Route::has('password.request'))
