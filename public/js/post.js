@@ -1,0 +1,50 @@
+$(document).ready(function() {
+	setTimeout(()=> $('.alert-danger').hide(1000) ,4000);
+});
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('#blah').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
+
+$('.deletePost').click(function(event) {
+	let post_id = Number(this.id);
+	var _token = $('input[name="_token"]').val();
+	Swal.fire({
+	  title: 'Are you sure?',
+	  text: "You won't be able to revert this!",
+	  type: 'question',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Yes, delete it!'
+	}).then((result) => {
+	  if (result.value) {
+	  	$.ajax({
+	  		url: `/admin/post/delete`,
+	  		type: 'POST',
+	  		data: {
+	  			_token	: _token,
+	  			post_id : post_id
+	  		},
+	  		success: function(data) {
+	  			Swal.fire(
+			      'Deleted!',
+			      'Your file has been deleted.',
+			      'success'
+			    );
+			    $('#post-' + post_id).hide(1000);
+	  		}
+	  	});
+	  }
+	})
+});
