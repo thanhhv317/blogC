@@ -16,10 +16,14 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'author', function() {
+Route::group(['prefix' => 'admin'], function() {
 	Route::group(['prefix' => 'post'], function() {
-		Route::get('/', ['as' => 'author.post', 'uses' => 'PostController@getPostList']);
-		
+		Route::get('/', ['as' => 'admin.post', 'uses' => 'PostController@getPostList']);
+		Route::get('/add', ['as' => 'admin.post.getNew', 'uses' => 'PostController@getNewPost']);
+		Route::post('/add', ['as' => 'admin.post.postNew', 'uses' => 'PostController@postNewPost']);
+		Route::get('/edit/{id}', ['as' => 'admin.post.getEdit', 'uses' => 'PostController@getEditPost']);
+		Route::post('/edit/{id}', ['as' => 'admin.post.postEdit', 'uses' => 'PostController@postEditPost']);
+		Route::post('/delete', ['as' => 'admin.delete', 'uses' => 'PostController@DeleteEditPost']);
 	});
 });
 
