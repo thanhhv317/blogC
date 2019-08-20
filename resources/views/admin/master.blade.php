@@ -183,8 +183,8 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ route('admin.comment') }}"><i class="fa fa-circle-o"></i>Wait for approval</a></li>
-                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>availability</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Spam</a></li>
+                <li><a href="{{ route('admin.comment.availability') }}"><i class="fa fa-circle-o"></i>availability</a></li>
+                <li><a href="{{ route('admin.comment.spam') }}"><i class="fa fa-circle-o"></i> Spam</a></li>
                
               </ul>
             </li>

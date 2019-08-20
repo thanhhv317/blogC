@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class Comment extends Model
 {
@@ -50,6 +51,17 @@ class Comment extends Model
     {
         return $this->where('id', '=', $id)
             ->update(['status' => $status]);
+    }
+
+    public function getDataByPostId($post_id)
+    {
+        return $this->where('post_id', '=', $post_id)
+            ->where('status', '=', 1)->get();
+    }
+
+    public function top4Comment()
+    {
+        return $this->where('status', '=', 1)->select('post_id', DB::raw('count(*) AS total'))->groupBy('post_id')->orderBy('total', 'DESC')->skip(0)->take(4)->get();
     }
 
 }

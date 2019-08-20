@@ -9,34 +9,22 @@
 		<!-- row -->
 		<div class="row">	
 			<!-- post -->
+			@foreach ($top2 as $item)
 			<div class="col-md-6">
 				<div class="post post-thumb">
-					<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
+					<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img class="top2-post" src="{{ asset('uploads/posts').'/'.$item->image }}" alt=""></a>
 					<div class="post-body">
 						<div class="post-meta">
-							<a class="post-category cat-2" href="category.html">JavaScript</a>
-							<span class="post-date">March 27, 2018</span>
+							<a class="post-category cat-{{ rand(1,4) }}" href="category.html">{{ $item->category }}</a>
+							<span class="post-date">{{ $item->created_at }}</span>
 						</div>
-						<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
+						<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 					</div>
 				</div>
 			</div>
+			@endforeach
 			<!-- /post -->
 
-			<!-- post -->
-			<div class="col-md-6">
-				<div class="post post-thumb">
-					<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-3" href="category.html">Jquery</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
 		</div>
 		<!-- /row -->
 
@@ -55,7 +43,7 @@
 						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img class="post-item-img" src="{{ asset('uploads/posts') . '/' . $item->image }}" alt="{{ $item->title }}"></a>
 						<div class="post-body">
 							<div class="post-meta">
-								<a class="post-category cat-1" href="category.html">{{ substr($item->name,0,20) }}</a>
+								<a class="post-category cat-{{ rand(1,4) }}" href="category.html">{{ substr($item->name,0,20) }}</a>
 								<span class="post-date">{{ $item->created_at }}</span>
 							</div>
 							<h3 class="post-title"><a href="">{{ $item->title }}</a></h3>
@@ -69,119 +57,48 @@
 			
 		</div>
 		<!-- /row -->
+		@foreach($left_post as $key => $item)
+			{{$key}}
+		@endforeach
 
 		<!-- row -->
 		<div class="row">
 			<div class="col-md-8">
 				<div class="row">
 					<!-- post -->
+					@if ($left_post)
 					<div class="col-md-12">
 						<div class="post post-thumb">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $left_post[0]->slug)  }}"><img src="{{ asset('uploads/posts').'/'. $left_post[0]->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-3" href="category.html">Jquery</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-3" href="category.html">{{ $left_post[0]->category }}</a>
+									<span class="post-date">{{ $left_post[0]->created_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
+								<h3 class="post-title"><a href="{{ route('blogPost', $left_post[0]->slug)  }}">{{ $left_post[0]->title }}</a></h3>
 							</div>
 						</div>
 					</div>
+					@endif
 					<!-- /post -->
 
 					<!-- post -->
+					@foreach ($left_post as $item)
 					<div class="col-md-6">
 						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'.$item->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-4" href="category.html">Css</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-{{ rand(1,4) }}" href="">{{ $item->category }}</a>
+									<span class="post-date">{{ $item->create_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
+								<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 							</div>
 						</div>
 					</div>
+					@endforeach
 					<!-- /post -->
 
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-1" href="category.html">Web Design</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-
-					<div class="clearfix visible-md visible-lg"></div>
-
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-4.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="category.html">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-5.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-3" href="category.html">Jquery</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-
-					<div class="clearfix visible-md visible-lg"></div>
-
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-3.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-1" href="category.html">Web Design</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-4.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="category.html">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
 				</div>
 			</div>
 
@@ -192,62 +109,15 @@
 						<h2>Đọc nhiều nhất</h2>
 					</div>
 
+					@foreach ($most_read as $item)
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-1.jpg') }}" alt=""></a>
+						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'. $item->image }}" alt=""></a>
 						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+							<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 						</div>
 					</div>
+					@endforeach
 
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-2.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-3.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-4.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-						</div>
-					</div>
-				</div>
-				<!-- /post widget -->
-
-				<!-- post widget -->
-				<div class="aside-widget">
-					<div class="section-title">
-						<h2>Gợi ý</h2>
-					</div>
-					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-3" href="category.html">Jquery</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-2" href="category.html">JavaScript</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-						</div>
-					</div>
 				</div>
 				<!-- /post widget -->
 				
@@ -279,48 +149,20 @@
 			</div>
 
 			<!-- post -->
+			@foreach ($featured_post as $item)
 			<div class="col-md-4">
 				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-4.jpg') }}" alt=""></a>
+					<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img class="post-item-img" src="{{ asset('uploads/posts').'/'.$item->image }}" alt=""></a>
 					<div class="post-body">
 						<div class="post-meta">
-							<a class="post-category cat-2" href="category.html">JavaScript</a>
+							<a class="post-category cat-{{ rand(1,4) }}" href="">{{ $item->name }}</a>
 							<span class="post-date">March 27, 2018</span>
 						</div>
-						<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
+						<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 					</div>
 				</div>
 			</div>
-			<!-- /post -->
-
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-5.jpg') }}" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-3" href="category.html">Jquery</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
-
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-3.jpg') }}" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-1" href="category.html">Web Design</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-					</div>
-				</div>
-			</div>
+			@endforeach
 			<!-- /post -->
 		</div>
 		<!-- /row -->
@@ -343,23 +185,25 @@
 						</div>
 					</div>
 					<!-- post -->
+					@foreach ($orther_post as $item)
 					<div class="col-md-12">
 						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-4.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img class="orther-post-img" src="{{ asset('uploads/posts').'/'.$item->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-2" href="category.html">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-{{ rand(1,5) }}" href="">{{ $item->name }}</a>
+									<span class="post-date">{{ $item->created_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+								<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
+								<p><div class="format-text">{!! substr($item->content, 0, 150) !!}...</div></p>
 							</div>
 						</div>
 					</div>
+					@endforeach
 					<!-- /post -->
 
-					<!-- post -->
-					<div class="col-md-12">
+					
+					<!-- <div class="col-md-12">
 						<div class="post post-row">
 							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-6.jpg') }}" alt=""></a>
 							<div class="post-body">
@@ -371,44 +215,13 @@
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 							</div>
 						</div>
-					</div>
-					<!-- /post -->
+					</div> -->
 
-					<!-- post -->
-					<div class="col-md-12">
-						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-4" href="category.html">Css</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
 					
-					<!-- post -->
-					<div class="col-md-12">
-						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-3" href="category.html">Jquery</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
 					
 					<div class="col-md-12">
 						<div class="section-row">
-							<button class="primary-button center-block">Load More</button>
+							<button class="btn btn-success center-block"><a href="#">Xem thêm </a></button>
 						</div>
 					</div>
 				</div>

@@ -81,7 +81,7 @@ class Post extends Model
             'categories.name as category'
         )
         ->orderBy('posts.created_at', 'desc')
-        ->skip(0)->take(3)
+        ->skip(2)->take(3)
         ->get();
     }
 
@@ -122,4 +122,77 @@ class Post extends Model
                 ->select('category_id', 'total', 'categories.name')
                 ->get();
     }
+
+    public function getTop2()
+    {
+        return $this->join('users', 'posts.author_id', 'users.id')
+        ->join('images', 'posts.id', 'images.post_id')
+        ->join('categories', 'categories.id', 'posts.category_id')
+        ->select(
+            'posts.id',
+            'posts.title',
+            'posts.content',
+            'posts.author_id',
+            'posts.category_id',
+            'posts.created_at',
+            'posts.slug',
+            'users.name',
+            'users.email',
+            'images.image',
+            'categories.name as category'
+        )
+        ->orderBy('posts.created_at', 'desc')
+        ->skip(0)->take(2)
+        ->get();
+    }
+
+
+    public function getMostRead($data)
+    {
+        return $this->join('users', 'posts.author_id', 'users.id')
+        ->join('images', 'posts.id', 'images.post_id')
+        ->join('categories', 'categories.id', 'posts.category_id')
+        ->join('comments', 'comments.post_id', 'posts.id')
+        ->whereIn('posts.id', $data)
+        ->select(
+            'posts.id',
+            'posts.title',
+            'posts.content',
+            'posts.author_id',
+            'posts.category_id',
+            'posts.created_at',
+            'posts.slug',
+            'users.name',
+            'users.email',
+            'images.image',
+            'categories.name as category'
+        )
+        ->distinct()
+        ->get();
+    }
+
+    public function getOrthePost($cate, $limit)
+    {
+        return $this->join('users', 'posts.author_id', 'users.id')
+        ->join('images', 'posts.id', 'images.post_id')
+        ->join('categories', 'categories.id', 'posts.category_id')
+        ->where('categories.id', '=', $cate)
+        ->select(
+            'posts.id',
+            'posts.title',
+            'posts.content',
+            'posts.author_id',
+            'posts.category_id',
+            'posts.created_at',
+            'posts.slug',
+            'users.name',
+            'users.email',
+            'images.image',
+            'categories.name as category'
+        )
+        ->orderBy('posts.created_at', 'desc')
+        ->skip(0)->take($limit)
+        ->get();
+    }
+
 }
