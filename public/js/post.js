@@ -48,3 +48,26 @@ $('.deletePost').click(function(event) {
 	  }
 	})
 });
+
+var editStatus = (id, id_post) => {
+	let status = $('#comment-'+id).find('select').val();
+	var _token = $('input[name="_token"]').val();
+	$.ajax({
+		url: '/admin/comment/edit',
+		type: 'POST',
+		data: {
+			id 		: id,
+			id_post : id_post,
+			status  : status,
+			_token  : _token
+		},
+		success: function(data) {
+			if (data == 1) {
+				Swal.fire('Updated!','This comment has been updated.','success'
+			    );
+			    $('#row-' + id).hide(1000);
+			}
+		}
+	});
+	
+}

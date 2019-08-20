@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'level'
+        'id', 'name', 'email', 'password', 'level', 'provider', 'provider_id',
     ];
 
     /**
@@ -47,5 +47,10 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasMany('App\Post', 'author_id');
+    }
+
+    public function updateName($id, $name)
+    {
+        return $this->where('id', $id)->update(['name' => $name]);
     }
 }

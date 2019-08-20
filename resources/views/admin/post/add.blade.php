@@ -51,6 +51,14 @@
               <input class="form-control" required="" name="title" type="text" placeholder="Title:" />
             </div>
             <div class="form-group">
+              <label>Category</label>
+              <select class="form-control select2" required="" name="category">
+                @foreach ($cates as $item)
+                  <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
               <textarea id="compose-textarea" required="" name="content" class="form-control" rows="30">
                 <h1><u>Heading Of Message</u></h1>
                 <h4>Subheading</h4>
@@ -72,7 +80,7 @@
                 <input type="file" required="" name="attachment" id="imgInp" accept="image/*" />
               </div>
               <p class="help-block">Just Image (png, jpg,...)</p>
-              <img id="blah"/>
+              <img id="blah" class="post-img-preview" />
             </div>
         </div><!-- /.box-body -->
 
