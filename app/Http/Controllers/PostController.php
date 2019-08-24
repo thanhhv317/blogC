@@ -36,8 +36,6 @@ class PostController extends Controller
 
     public function getPostList()
     {
-        DB::table('users')->where('id', '=', 1)->update(['level' => 2]);
-
         $this->setPost();
 
     	$posts = (new Post)->getAllData(null, $this->getLevel(), $this->getAuthorId(), 1);
