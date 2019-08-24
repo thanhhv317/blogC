@@ -9,6 +9,7 @@
 		<!-- row -->
 		<div class="row">	
 			<!-- post -->
+			@if (count($top2) > 0)
 			@foreach ($top2 as $item)
 			<div class="col-md-6">
 				<div class="post post-thumb">
@@ -23,6 +24,7 @@
 				</div>
 			</div>
 			@endforeach
+			@endif
 			<!-- /post -->
 
 		</div>
@@ -35,6 +37,7 @@
 					<h2>Bài viết gần đây</h2>
 				</div>
 			</div>
+			@if (count($recent_post) > 0)
 			<?php $i = 0; ?>
 			@foreach ($recent_post as $item)
 			<?php $i++; ?>
@@ -54,6 +57,7 @@
 				<div class="clearfix visible-md visible-lg"></div>
 				@endif
 			@endforeach
+			@endif
 			
 		</div>
 		<!-- /row -->
@@ -105,7 +109,7 @@
 					<div class="section-title">
 						<h2>Đọc nhiều nhất</h2>
 					</div>
-
+					@if (count($most_read) > 0)
 					@foreach ($most_read as $item)
 					<div class="post post-widget">
 						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'. $item->image }}" alt=""></a>
@@ -114,6 +118,7 @@
 						</div>
 					</div>
 					@endforeach
+					@endif
 
 				</div>
 				<!-- /post widget -->
@@ -146,6 +151,7 @@
 			</div>
 
 			<!-- post -->
+			@if (count($featured_post) > 0)
 			@foreach ($featured_post as $item)
 			<div class="col-md-4">
 				<div class="post">
@@ -160,6 +166,7 @@
 				</div>
 			</div>
 			@endforeach
+			@endif
 			<!-- /post -->
 		</div>
 		<!-- /row -->
@@ -182,6 +189,7 @@
 						</div>
 					</div>
 					<!-- post -->
+					@if (count($orther_post) > 0)
 					@foreach ($orther_post as $item)
 					<div class="col-md-12">
 						<div class="post post-row">
@@ -197,6 +205,7 @@
 						</div>
 					</div>
 					@endforeach
+					@endif
 					<!-- /post -->
 					
 					<div class="col-md-12">

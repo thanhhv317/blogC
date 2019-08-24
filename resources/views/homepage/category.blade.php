@@ -141,7 +141,7 @@
 					<div class="section-title">
 						<h2>Đọc nhiều nhất</h2>
 					</div>
-
+					@if (count($most_read) > 0)
 					@foreach ($most_read as $item)
 					<div class="post post-widget">
 						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'. $item->image }}" alt=""></a>
@@ -150,6 +150,7 @@
 						</div>
 					</div>
 					@endforeach
+					@endif
 
 				</div>
 				<!-- /post widget -->
