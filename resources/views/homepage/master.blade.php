@@ -117,7 +117,7 @@
 					<div class="col-md-5">
 						<div class="footer-widget">
 							<div class="footer-logo">
-								<a href="index.html" class="logo"><img src="{{ asset('homepages/img/logo.png') }}" alt=""></a>
+								<a href="{{ url('/') }}" class="logo"><img src="{{ asset('homepages/img/logo.png') }}" alt=""></a>
 							</div>
 							<ul class="footer-nav">
 								

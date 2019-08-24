@@ -16,7 +16,7 @@
 					<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img class="top2-post" src="{{ asset('uploads/posts').'/'.$item->image }}" alt=""></a>
 					<div class="post-body">
 						<div class="post-meta">
-							<a class="post-category cat-{{ rand(1,4) }}" href="{{ route('category', $left_post[0]->category_alias) }}">{{ $item->category }}</a>
+							<a class="post-category cat-{{ rand(1,4) }}" href="{{ route('category', $item->category_alias) }}">{{ $item->category }}</a>
 							<span class="post-date">{{ $item->created_at }}</span>
 						</div>
 						<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
