@@ -4,15 +4,16 @@
 
 <section class="content-header">
   <h1>
-    Post List
+    {{ $title }}
     <small>Control panel</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+    <li><a href="{{ route('admin.post') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
     <li class="active">post</li>
   </ol>
 </section>
 
+@if (isset($profile->image))
 <section class="content-header">
   <div class="col-12">
     <div class="box box-success">
@@ -22,6 +23,17 @@
       </div>
   </div>
 </section>
+@else
+  <section class="content-header">
+  <div class="col-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h2>You must fill in personal information to write articles.</h2>
+        </div>
+      </div>
+  </div>
+</section>
+@endif
 
  <section class="content">
   <div class="row">
@@ -53,46 +65,36 @@
           <div class="box-footer">
             <a href="{{ route('admin.post.getEdit', $value->post_id) }}" class="btn btn-primary">Edit</a>
             <button id="{{ $value->post_id }}" type="button" class="btn btn-danger deletePost">Delete</button>
+            <a href="" class="btn btn-info"><i class="fa fa-comments"></i>Comment: </a>
+
+            <select class="change-status" id="{{ $value->post_id }}">
+              <option value="0" {{ ($value->status == 0) ? "selected" : "" }} >Disable</option>
+              <option value="1" {{ ($value->status == 1) ? "selected" : "" }}>Enable</option>
+            </select>
           </div>
         </form>
       </div>
     </div>
     @endforeach
 
-    <div class="col-md-6">
-      <!-- general form elements -->
-      <div class="box box-primary">
+  </div> 
+</section>
+
+@if ($posts->count() < $posts->total())
+<section class="content-header">
+  <div class="col-12">
+    <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Quick Example</h3>
-        </div><!-- /.box-header -->
-        <!-- form start -->
-        <form role="form">
-          <div class="box-body">
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row no-gutters">
-                <div class="col-md-4">
-                  <img src="https://via.placeholder.com/150x150" class="card-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- /.box-body -->
-
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Edit</button>
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </div>
-        </form>
-      </div><!-- /.box -->
-    </div>
-
-  </div>   <!-- /.row -->
-</section><!-- /.content -->
+          <nav aria-label="pagination">
+            <ul class="pager">
+              <li class="{{ ($posts->currentPage() == 1) ? 'disabled' : 'enabled' }}"><a href="{{ $posts->previousPageUrl() }}">Previous</a></li>
+              <li class="{{ ($posts->currentPage() == $posts->lastPage()) ? 'disabled' : 'enabled' }}"><a href="{{ $posts->nextPageUrl() }}">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+  </div>
+</section>
+@endif
 
 @endsection()

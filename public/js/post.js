@@ -48,3 +48,46 @@ $('.deletePost').click(function(event) {
 	  }
 	})
 });
+
+var editStatus = (id, id_post) => {
+	let status = $('#comment-'+id).find('select').val();
+	var _token = $('input[name="_token"]').val();
+	$.ajax({
+		url: '/admin/comment/edit',
+		type: 'POST',
+		data: {
+			id 		: id,
+			id_post : id_post,
+			status  : status,
+			_token  : _token
+		},
+		success: function(data) {
+			if (data == 1) {
+				Swal.fire('Updated!','This comment has been updated.','success');
+			    $('#row-' + id).hide(1000);
+			}
+		}
+	});	
+}
+
+$('.change-status').change(function(event) {
+	let _token = $('input[name="_token"]').val();
+	let id = $(this).attr('id');
+	let status = $(this).val();
+	$.ajax({
+		url: '/admin/post/changeStatus',
+		type: 'POST',
+		data: {
+			id: id,
+			status: status,
+			_token: _token
+		},
+		success: function(data) {
+			if (data == 1)
+				Swal.fire('Updated!','This post has been updated.','success');
+			else
+				Swal.fire('Error!','This post has not been updated.','error');
+		}
+	});
+	
+});
