@@ -10,6 +10,25 @@ use Auth;
 
 class CommentController extends Controller
 {
+    private $level;
+    private $author_id;
+
+    public function setPost() 
+    {
+        $this->level = Auth::user()->level;
+        $this->author_id = Auth::user()->id;
+    }
+
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    public function getAuthorId()
+    {
+        return $this->author_id;
+    }
+
     public function sendComent(CommentRequest $request)
     {
     	if ($request->ajax()) {
@@ -27,22 +46,23 @@ class CommentController extends Controller
 
     public function getCommentWaitList()
     {
-        return $this->actionController(0, 'Comments are pending approval');
+        return $this->getListComment(0, 'Comments are pending approval');
     }
 
     public function getCommentAvailabilityList()
     {
-        return $this->actionController(1, 'Comments are Availability');
+        return $this->getListComment(1, 'Comments are Availability');
     }
 
     public function getCommentSpamList()
     {
-        return $this->actionController(2, 'Comments are spam');
+        return $this->getListComment(2, 'Comments are spam');
     }
 
-    public function actionController($status, $titlePage)
+    public function getListComment($status, $titlePage)
     {
-        $comments = (new Comment())->getComment($status);
+        $this->setPost();
+        $comments = (new Comment())->getComment($status, $this->getLevel(), $this->getAuthorId());
         return view('admin.comments.wait-approval')
             ->with([
                 'comments' => $comments, 

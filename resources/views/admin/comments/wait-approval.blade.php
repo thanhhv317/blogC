@@ -73,4 +73,15 @@
   	</div>
 </section>
 
+@if ($comments->count() < $comments->total())
+    <div class="box-header with-border">
+      <nav aria-label="...">
+        <ul class="pager">
+          <li class="{{ ($comments->currentPage() == 1) ? 'disabled' : 'enabled' }}"><a href="{{ $comments->previousPageUrl() }}">Previous</a></li>
+          <li class="{{ ($comments->currentPage() == $comments->lastPage()) ? 'disabled' : 'enabled' }}"><a href="{{ $comments->nextPageUrl() }}">Next</a></li>
+        </ul>
+      </nav>
+    </div>
+@endif
+
 @endsection()

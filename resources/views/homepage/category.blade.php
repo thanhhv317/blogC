@@ -5,11 +5,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10">
+				@if (count($posts) > 0)
 				<ul class="page-header-breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li>JavaScript</li>
+					<li><a href="{{ url('/') }}">Home</a></li>
+					<li>{{ $posts[0]->category }}</li>
 				</ul>
-				<h1>JavaScript</h1>
+				<h1 class="category" id="{{ $posts[0]->category_id }}">{{ $posts[0]->category }}</h1>
+				@endif
 			</div>
 		</div>
 	</div>
@@ -25,51 +27,43 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="row">
+					
 					<!-- post -->
+					@if (count($posts) > 0)
 					<div class="col-md-12">
 						<div class="post post-thumb">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $posts[0]->slug) }}"><img class="top2-post" src="{{ asset('uploads/posts').'/'.$posts[0]->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-{{ rand(1,3) }}" href="#">{{ $posts[0]->name }}</a>
+									<span class="post-date">{{ $posts[0]->created_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Javascript : Prototype vs Class</a></h3>
+								<h3 class="post-title"><a href="{{ route('blogPost', $posts[0]->slug) }}">{{ $posts[0]->title }}</a></h3>
 							</div>
 						</div>
 					</div>
+					@endif
 					<!-- /post -->
 								
+					@if (count($posts) >= 3)
 					<!-- post -->
+					@for ($i = 1; $i < 3; ++$i)
 					<div class="col-md-6">
 						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-4.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $posts[$i]->slug) }}"><img src="{{ asset('uploads/posts').'/'.$posts[$i]->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-{{ rand(1,5) }}" href="#">{{ $posts[$i]->name }}</a>
+									<span class="post-date">{{ $posts[$i]->created_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
+								<h3 class="post-title"><a href="{{ route('blogPost', $posts[$i]->slug) }}">{{ $posts[$i]->title }}</a></h3>
 							</div>
 						</div>
 					</div>
+					@endfor
+					@endif
 					<!-- /post -->
 
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-6.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					
 					<div class="clearfix visible-md visible-lg"></div>
 					
 					<!-- ad -->
@@ -81,76 +75,55 @@
 						</div>
 					</div>
 					<!-- ad -->
-					
+				
 					<!-- post -->
+					@if (count($posts) > 3)
+					<?php $size = count($posts); ?>
+					@for ($i = 3; $i < $size; ++$i)
 					<div class="col-md-12">
 						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $posts[$i]->slug) }}"><img class="orther-post-img" src="{{ asset('uploads/posts').'/'.$posts[$i]->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-{{ rand(1,5) }}" href="">{{ $posts[$i]->name }}</a>
+									<span class="post-date">{{ $posts[$i]->created_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+								<h3 class="post-title"><a href="{{ route('blogPost', $posts[$i]->slug) }}">{{ $posts[$i]->title }}</a></h3>
+								<p><div class="format-text">{!! substr($posts[$i]->content, 0, 150) !!}...</div></p>
 							</div>
 						</div>
 					</div>
-					<!-- /post -->
-					
-					<!-- post -->
+					@endfor
+					@else
+					@foreach ($posts as $item)
 					<div class="col-md-12">
 						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-5.jpg') }}" alt=""></a>
+							<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img class="orther-post-img" src="{{ asset('uploads/posts').'/'.$item->image }}" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
+									<a class="post-category cat-{{ rand(1,5) }}" href="">{{ $item->name }}</a>
+									<span class="post-date">{{ $item->created_at }}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Microsoft’s TypeScript Fills A Long-standing Void In JavaScript</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+								<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
+								<p><div class="format-text">{!! substr($item->content, 0, 150) !!}...</div></p>
 							</div>
 						</div>
 					</div>
-					<!-- /post -->
-
-					<!-- post -->
-					<div class="col-md-12">
-						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-3.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Javascript : Prototype vs Class</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-							</div>
-						</div>
+					@endforeach
+					@endif
+					<div class="append-data">
 					</div>
-					<!-- /post -->
 					
-					<!-- post -->
+					@if (count($posts) > 6)
 					<div class="col-md-12">
-						<div class="post post-row">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="#">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					
-					<div class="col-md-12">
+						<form>
+							@csrf
 						<div class="section-row">
-							<button class="primary-button center-block">Load More</button>
+							<button type="button" id="loadMore" class="primary-button center-block">Xem thêm</button>
 						</div>
+						</form>
 					</div>
+					@endif
 				</div>
 			</div>
 			
@@ -166,57 +139,38 @@
 				<!-- post widget -->
 				<div class="aside-widget">
 					<div class="section-title">
-						<h2>Most Read</h2>
+						<h2>Đọc nhiều nhất</h2>
 					</div>
 
+					@foreach ($most_read as $item)
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-1.jpg') }}" alt=""></a>
+						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'. $item->image }}" alt=""></a>
 						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+							<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 						</div>
 					</div>
+					@endforeach
 
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-2.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-3.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-4.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-						</div>
-					</div>
 				</div>
 				<!-- /post widget -->
 				
 				<!-- catagories -->
 				<div class="aside-widget">
 					<div class="section-title">
-						<h2>Catagories</h2>
+						<h2>Thể loại</h2>
 					</div>
 					<div class="category-widget">
 						<ul>
-							<li><a href="#" class="cat-1">Web Design<span>340</span></a></li>
-							<li><a href="#" class="cat-2">JavaScript<span>74</span></a></li>
-							<li><a href="#" class="cat-4">JQuery<span>41</span></a></li>
-							<li><a href="#" class="cat-3">CSS<span>35</span></a></li>
+							@foreach ($cate as $item)
+								<li><a href="{{ route('category', $item->slug) }}" class="cat-{{ $item->category_id }}">{{ $item->name }}<span>{{ $item->total }}</span></a></li>
+							@endforeach
 						</ul>
 					</div>
 				</div>
 				<!-- /catagories -->
 				
 				<!-- tags -->
-				<div class="aside-widget">
+				<!-- <div class="aside-widget">
 					<div class="tags-widget">
 						<ul>
 							<li><a href="#">Chrome</a></li>
@@ -230,23 +184,9 @@
 							<li><a href="#">Website</a></li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
 				<!-- /tags -->
 				
-				<!-- archive -->
-				<div class="aside-widget">
-					<div class="section-title">
-						<h2>Archive</h2>
-					</div>
-					<div class="archive-widget">
-						<ul>
-							<li><a href="#">Jan 2018</a></li>
-							<li><a href="#">Feb 2018</a></li>
-							<li><a href="#">Mar 2018</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- /archive -->
 			</div>
 		</div>
 		<!-- /row -->

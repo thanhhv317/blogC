@@ -16,5 +16,18 @@
 }
 
 .orther-post-img {
-  height: 190px;
+  height: 180px;
+}
+
+#top {
+  width: 50px; height: 50px; 
+  position: fixed; bottom: 10px; right: 10px;
+  cursor: pointer; 
+  background-color: #cccccc;
+  z-index: 10;
+}
+
+.icon-back-to-top {
+  font-size: 5rem;
+  margin-left: 20%;
 }

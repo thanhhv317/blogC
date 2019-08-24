@@ -4,15 +4,16 @@
 
 <section class="content-header">
   <h1>
-    Post List
+    {{ $title }}
     <small>Control panel</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+    <li><a href="{{ route('admin.post') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
     <li class="active">post</li>
   </ol>
 </section>
 
+@if (isset($profile->image))
 <section class="content-header">
   <div class="col-12">
     <div class="box box-success">
@@ -22,6 +23,17 @@
       </div>
   </div>
 </section>
+@else
+  <section class="content-header">
+  <div class="col-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h2>You must fill in personal information to write articles.</h2>
+        </div>
+      </div>
+  </div>
+</section>
+@endif
 
  <section class="content">
   <div class="row">
@@ -54,13 +66,35 @@
             <a href="{{ route('admin.post.getEdit', $value->post_id) }}" class="btn btn-primary">Edit</a>
             <button id="{{ $value->post_id }}" type="button" class="btn btn-danger deletePost">Delete</button>
             <a href="" class="btn btn-info"><i class="fa fa-comments"></i>Comment: </a>
+
+            <select class="change-status" id="{{ $value->post_id }}">
+              <option value="0" {{ ($value->status == 0) ? "selected" : "" }} >Disable</option>
+              <option value="1" {{ ($value->status == 1) ? "selected" : "" }}>Enable</option>
+            </select>
           </div>
         </form>
       </div>
     </div>
     @endforeach
 
-  </div>   <!-- /.row -->
-</section><!-- /.content -->
+  </div> 
+</section>
+
+@if ($posts->count() < $posts->total())
+<section class="content-header">
+  <div class="col-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <nav aria-label="pagination">
+            <ul class="pager">
+              <li class="{{ ($posts->currentPage() == 1) ? 'disabled' : 'enabled' }}"><a href="{{ $posts->previousPageUrl() }}">Previous</a></li>
+              <li class="{{ ($posts->currentPage() == $posts->lastPage()) ? 'disabled' : 'enabled' }}"><a href="{{ $posts->nextPageUrl() }}">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+  </div>
+</section>
+@endif
 
 @endsection()

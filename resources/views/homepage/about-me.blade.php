@@ -6,10 +6,10 @@
 		<div class="row">
 			<div class="col-md-10">
 				<ul class="page-header-breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li>About Us</li>
+					<li><a href="{{ url('/') }}">Home</a></li>
+					<li>About me</li>
 				</ul>
-				<h1>About Us</h1>
+				<h1>About me</h1>
 			</div>
 		</div>
 	</div>
@@ -24,26 +24,25 @@
 		<!-- row -->
 		<div class="row">
 			<div class="col-md-8">
-				<div class="section-row">
-					<p>Lorem ipsum dolor sit amet, ea eos tibique expetendis, tollit viderer ne nam. No ponderum accommodare eam, purto nominavi cum ea, sit no dolores tractatos. Scripta principes quaerendum ex has, ea mei omnes eruditi. Nec ex nulla mandamus, quot omnesque mel et. Amet habemus ancillae id eum, justo dignissim mei ea, vix ei tantas aliquid. Cu laudem impetus conclusionemque nec, velit erant persius te mel. Ut eum verterem perpetua scribentur.</p>
-					<figure class="figure-img">
-						<img class="img-responsive" src="{{ asset('homepages/img/about-1.jpg') }}" alt="">
-					</figure>
-					<p>Vix mollis admodum ei, vis legimus voluptatum ut, vis reprimique efficiendi sadipscing ut. Eam ex animal assueverit consectetuer, et nominati maluisset repudiare nec. Rebum aperiam vis ne, ex summo aliquando dissentiunt vim. Quo ut cibo docendi. Suscipit indoctum ne quo, ne solet offendit hendrerit nec. Case malorum evertitur ei vel.</p>
-				</div>
 				<div class="row section-row">
 					<div class="col-md-6">
 						<figure class="figure-img">
-							<img class="img-responsive" src="{{ asset('homepages/img/about-2.jpg') }}" alt="">
+							<img class="img-responsive" src="{{ asset('homepages/img/contact.jpg') }}" alt="">
 						</figure>
 					</div>
 					<div class="col-md-6">
-						<h3>Our Mission</h3>
-						<p>Id usu mutat debet tempor, fugit omnesque posidonium nec ei. An assum labitur ocurreret qui, eam aliquid ornatus tibique ut.</p>
+						<h3>Hoang Van Thanh</h3>
+						<p>is an information technology enthusiast, always exploring, researching and sharing what you know for everyone. Looking forward to creating a forum to discuss specialized knowledge for the work of all ITer.</p>
 						<ul class="list-style">
-							<li><p>Vix mollis admodum ei, vis legimus voluptatum ut.</p></li>
-							<li><p>Cu cum alia vide malis. Vel aliquid facilis adolescens.</p></li>
-							<li><p>Laudem rationibus vim id. Te per illum ornatus.</p></li>
+							<li><p>2016-2020: Ho Chi Minh University Education</p></li>
+							<li><p>Email: thanhhoang317@gmail.com</p></li>
+							<li><p>Web developer.</p></li>
+							<li><p>Skill: </p></li>
+							<ul class="list-style">
+								<li><p>HTML, CSS, Javascript, Bootstrap, Jquery,..</p></li>
+								<li><p>PHP(OOP, MVC, Framework: Laravel)</p></li>
+								<li><p>GIT</p></li>
+							</ul>
 						</ul>
 					</div>
 				</div>
@@ -62,36 +61,18 @@
 				<!-- post widget -->
 				<div class="aside-widget">
 					<div class="section-title">
-						<h2>Most Read</h2>
+						<h2>Đọc nhiều nhất</h2>
 					</div>
 
+					@foreach ($most_read as $item)
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-1.jpg') }}" alt=""></a>
+						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'. $item->image }}" alt=""></a>
 						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+							<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 						</div>
 					</div>
+					@endforeach
 
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-2.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-3.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-4.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-						</div>
-					</div>
 				</div>
 				<!-- /post widget -->
 			</div>

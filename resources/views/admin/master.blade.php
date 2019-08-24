@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Admin no-blog</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -53,58 +53,20 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               
-              <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-red"></i> 5 new members joined
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-user text-red"></i> You changed your username
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">View all</a></li>
-                </ul>
-              </li>
-              
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  @if (isset($profile->image))
                   <img src="{{ asset('uploads/users').'/'.$profile->image }}" class="user-image" alt="User Image" />
+                  @endif
                   <span class="hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
+                    @if (isset($profile->image))
                     <img src="{{ asset('uploads/users').'/'.$profile->image }}" class="img-circle" alt="User Image" />
+                    @endif
                     <p>
                       {{ Auth::user()->name }}
                       <small>Member since Nov. 2012</small>
@@ -142,7 +104,9 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
+              @if (isset($profile->image))
               <img src="{{ asset('uploads/users').'/'.$profile->image }}" class="img-circle" alt="User Image" />
+              @endif
             </div>
             <div class="pull-left info">
               <p>{{ Auth::user()->name }}</p>
@@ -170,9 +134,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ route('admin.post') }}"><i class="fa fa-circle-o"></i>All Post</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i>Post Draft</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i>Post awaiting approval</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i>Post approved</a></li>
+                <li><a href="{{ route('admin.post.draf') }}"><i class="fa fa-circle-o"></i>Post Draft</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -195,12 +157,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                <li><a href="{{ route('admin.statistical.post') }}"><i class="fa fa-circle-o"></i> Post</a></li>
+                <li><a href="{{ route('admin.statistical.comment') }}"><i class="fa fa-circle-o"></i> Comment</a></li>
+                
               </ul>
             </li>
             
@@ -219,9 +178,9 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.2.0
+          <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019 <a href="{{ url('/') }}">No Blog</a>.</strong>
       </footer>
 
       <!-- Control Sidebar -->

@@ -30,11 +30,14 @@ class Comment extends Model
     	return $this->id;
     }
 
-    public function getComment($status)
+    public function getComment($status, $level, $author_id)
     {
-        return $this->join('posts', 'posts.id', '=', 'comments.post_id')
-        ->where('status', '=', $status)
-        ->select(
+        $comments =  $this->join('posts', 'posts.id', '=', 'comments.post_id')
+        ->where('status', '=', $status);
+        if ($level == 1) {
+            $comments = $comments->where('posts.author_id', '=', $author_id);
+        }
+        return $comments->select(
             'comments.id',
             'comments.user_name',
             'comments.user_mail',
@@ -44,7 +47,7 @@ class Comment extends Model
             'comments.post_id',
             'posts.slug'
         )
-        ->get();
+        ->paginate(10);
     }
 
     public function updateStatus($id, $status)
@@ -56,12 +59,19 @@ class Comment extends Model
     public function getDataByPostId($post_id)
     {
         return $this->where('post_id', '=', $post_id)
-            ->where('status', '=', 1)->get();
+            ->where('status', '=', 1)
+            ->get();
     }
 
     public function top4Comment()
     {
-        return $this->where('status', '=', 1)->select('post_id', DB::raw('count(*) AS total'))->groupBy('post_id')->orderBy('total', 'DESC')->skip(0)->take(4)->get();
+        return $this->where('status', '=', 1)
+            ->select('post_id', DB::raw('count(*) AS total'))
+            ->groupBy('post_id')
+            ->orderBy('total', 'DESC')
+            ->skip(0)
+            ->take(4)
+            ->get();
     }
 
 }

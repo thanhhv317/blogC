@@ -15,6 +15,7 @@
 		<link type="text/css" rel="stylesheet" href="{{ asset('homepages/css/bootstrap.min.css') }}"/>
 
 		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 		<link rel="stylesheet" href="{{ asset('homepages/css/font-awesome.min.css') }}">
 
 		<!-- Custom stlylesheet -->
@@ -40,8 +41,9 @@
 
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
-							<li><a href="{{ route('category') }}">Bài viết hay</a></li>
-							<li><a href="{{ route('contact') }}">Liên hệ</a></li>
+							<li><a href="{{ route('category','chuyen-coding') }}">Chuyện Coding</a></li>
+							<li><a href="{{ route('category','chuyen-nghe-nghiep') }}">Chuyện nghề nghiệp </a></li>
+							<li><a href="{{ route('category', 'chuyen-linh-tinh') }}">Chuyện linh tinh</a></li>
 							<li><a href="{{ route('aboutMe') }}">About me</a></li>
 						</ul>
 						<!-- /nav -->
@@ -51,7 +53,10 @@
 							<button class="aside-btn"><i class="fa fa-bars"></i></button>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 							<div class="search-form">
-								<input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+								<form class="search-input" action="{{ route('search') }}" method="get">
+									<input class="search-input" type="text" name="title" placeholder="Enter Your Search ...">
+									<button class="btn btn-info btn-lg btn-block" >Search</button>
+								</form>
 								<button class="search-close"><i class="fa fa-times"></i></button>
 							</div>
 						</div>
@@ -66,47 +71,20 @@
 					<div class="section-row">
 						<ul class="nav-aside-menu">
 							<li><a href="{{ route('homepage') }}">Trang chủ</a></li>
-							<li><a href="{{ route('category') }}">Bài viết hay</a></li>
-							<li><a href="{{ route('contact') }}">Liên hệ</a></li>
+							<li><a href="{{ route('category','chuyen-coding') }}">Chuyện Coding</a></li>
+							<li><a href="{{ route('category','chuyen-nghe-nghiep') }}">Chuyện nghề nghiệp </a></li>
+							<li><a href="{{ route('category', 'chuyen-linh-tinh') }}">Chuyện linh tinh</a></li>
 							<li><a href="{{ route('aboutMe') }}">About me</a></li>
 						</ul>
 					</div>
 					<!-- /nav -->
-
-					<!-- widget posts -->
-					<div class="section-row">
-						<h3>Bài viết mới nhất</h3>
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-2.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-3.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-4.jpg') }}" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /widget posts -->
 
 					<!-- social links -->
 					<div class="section-row">
 						<h3>Follow me</h3>
 						<ul class="nav-aside-social">
 							<li><a href="https://www.facebook.com/thanhfuzu18"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							<div class="fb-share-button" data-href="#" data-layout="button_count" data-size="small"><a target="_blank" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
 						</ul>
 					</div>
 					<!-- /social links -->
@@ -125,6 +103,10 @@
 		<!-- /Header -->
 
 		@yield('content')
+
+		<div id="top" title="Back to top">
+			<i class="fas fa-angle-up icon-back-to-top"></i>
+		</div>
 		
 		<!-- Footer -->
 		<footer id="footer">
@@ -138,13 +120,12 @@
 								<a href="index.html" class="logo"><img src="{{ asset('homepages/img/logo.png') }}" alt=""></a>
 							</div>
 							<ul class="footer-nav">
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Advertisement</a></li>
+								
 							</ul>
 							<div class="footer-copyright">
-								<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy 2019 All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
+								<span>&copy; Copyright &copy 2019 | No-Blog 
+									<i class="fa fa-heart-o" aria-hidden="true"></i>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -153,11 +134,9 @@ Copyright &copy 2019 All rights reserved | This template is made with <i class="
 						<div class="row">
 							<div class="col-md-6">
 								<div class="footer-widget">
-									<h3 class="footer-title">About Us</h3>
+									<h3 class="footer-title">About me</h3>
 									<ul class="footer-links">
-										<li><a href="about.html">About Us</a></li>
-										<li><a href="#">Join Us</a></li>
-										<li><a href="contact.html">Contacts</a></li>
+										<li><a href="{{ route('aboutMe') }}">About me</a></li>
 									</ul>
 								</div>
 							</div>
@@ -165,41 +144,24 @@ Copyright &copy 2019 All rights reserved | This template is made with <i class="
 								<div class="footer-widget">
 									<h3 class="footer-title">Catagories</h3>
 									<ul class="footer-links">
-										<li><a href="category.html">Web Design</a></li>
-										<li><a href="category.html">JavaScript</a></li>
-										<li><a href="category.html">Css</a></li>
-										<li><a href="category.html">Jquery</a></li>
+										<li><a href="{{ route('category', 'chuyen-coding') }}">Chuyện Coding </a></li>
+										<li><a href="{{ route('category', 'chuyen-nghe-nghiep') }}">Chuyện Nghề nghiệp </a></li>
+										<li><a href="{{ route('category', 'chuyen-linh-tinh') }}">Chuyện Linh tinh </a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-md-3">
-						<div class="footer-widget">
-							<h3 class="footer-title">Join our Newsletter</h3>
-							<div class="footer-newsletter">
-								<form>
-									<input class="input" type="email" name="newsletter" placeholder="Enter your email">
-									<button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
-								</form>
-							</div>
-							<ul class="footer-social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
-						</div>
-					</div>
-
+					
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</footer>
 		<!-- /Footer -->
-
+		<div id="fb-root"></div>
+		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v4.0&appId=1258908524276060&autoLogAppEvents=1"></script>
 		<!-- jQuery Plugins -->
 		<script src="{{ asset('homepages/js/jquery.min.js') }}"></script>
 		<script src="{{ asset('homepages/js/bootstrap.min.js') }}"></script>

@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="post-meta">
-					<a class="post-category cat-2" href="category.html">{{ $post->category }}</a>
+					<a class="post-category cat-2">{{ $post->category }}</a>
 					<span class="post-date">{{ $post->created_at }}</span>
 				</div>
 				<h1>{{ $post->title }}</h1>
@@ -31,12 +31,12 @@
 						{!! $post->content !!}
 					</div>
 					<div class="post-shares sticky-shares">
-						<a href="#" class="share-facebook"><i class="fa fa-facebook"></i></a>
-						<a href="#" class="share-twitter"><i class="fa fa-twitter"></i></a>
-						<a href="#" class="share-google-plus"><i class="fa fa-google-plus"></i></a>
-						<a href="#" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
-						<a href="#" class="share-linkedin"><i class="fa fa-linkedin"></i></a>
-						<a href="#"><i class="fa fa-envelope"></i></a>
+						<a href="#/" class="share-facebook"><i class="fa fa-facebook"></i></a>
+						<a href="#/" class="share-twitter"><i class="fa fa-twitter"></i></a>
+						<a href="#/" class="share-google-plus"><i class="fa fa-google-plus"></i></a>
+						<a href="#/" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
+						<a href="#/" class="share-linkedin"><i class="fa fa-linkedin"></i></a>
+						<a href="#/"><i class="fa fa-envelope"></i></a>
 					</div>
 				</div>
 
@@ -62,9 +62,9 @@
 								<p>{{ $post->information }}</p>
 								<ul class="author-social">
 									<li><a href="{{ $post->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+									<li><a><i class="fa fa-twitter"></i></a></li>
+									<li><a><i class="fa fa-google-plus"></i></a></li>
+									<li><a><i class="fa fa-instagram"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -76,6 +76,7 @@
 				<div class="section-row">
 					<div class="section-title">
 						<h2>{{ isset($comment) ? count($comment) : 0 }} Comments</h2>
+						<div class="fb-share-button" data-href="#" data-layout="button_count" data-size="large"><a target="_blank" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
 					</div>
 
 					<div class="post-comments">
@@ -89,7 +90,6 @@
 								<div class="media-heading">
 									<h4>{{ $item->user_name }}</h4>
 									<span class="time">{{ $item->created_at }}</span>
-									<a href="#" class="reply">Reply</a>
 								</div>
 								<p>{{ $item->content }}</p>
 							</div>
@@ -154,86 +154,37 @@
 				<!-- post widget -->
 				<div class="aside-widget">
 					<div class="section-title">
-						<h2>Most Read</h2>
+						<h2>Đọc nhiều nhất</h2>
 					</div>
 
+					@foreach ($most_read as $item)
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-1.jpg') }}" alt=""></a>
+						<a class="post-img" href="{{ route('blogPost', $item->slug) }}"><img src="{{ asset('uploads/posts').'/'. $item->image }}" alt=""></a>
 						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+							<h3 class="post-title"><a href="{{ route('blogPost', $item->slug) }}">{{ $item->title }}</a></h3>
 						</div>
 					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-2.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-3.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/widget-4.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-						</div>
-					</div>
+					@endforeach
 				</div>
 				<!-- /post widget -->
 
-				<!-- post widget -->
-				<div class="aside-widget">
-					<div class="section-title">
-						<h2>Featured Posts</h2>
-					</div>
-					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-2.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-3" href="#">Jquery</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-						</div>
-					</div>
-
-					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="{{ asset('homepages/img/post-1.jpg') }}" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-2" href="#">JavaScript</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-						</div>
-					</div>
-				</div>
-				<!-- /post widget -->
-				
 				<!-- catagories -->
 				<div class="aside-widget">
 					<div class="section-title">
-						<h2>Catagories</h2>
+						<h2>Thể loại</h2>
 					</div>
 					<div class="category-widget">
 						<ul>
-							<li><a href="#" class="cat-1">Web Design<span>340</span></a></li>
-							<li><a href="#" class="cat-2">JavaScript<span>74</span></a></li>
-							<li><a href="#" class="cat-4">JQuery<span>41</span></a></li>
-							<li><a href="#" class="cat-3">CSS<span>35</span></a></li>
+							@foreach ($cate as $item)
+								<li><a href="{{ route('category', $item->slug) }}" class="cat-{{ $item->category_id }}">{{ $item->name }}<span>{{ $item->total }}</span></a></li>
+							@endforeach
 						</ul>
 					</div>
 				</div>
 				<!-- /catagories -->
 				
 				<!-- tags -->
-				<div class="aside-widget">
+				<!-- <div class="aside-widget">
 					<div class="tags-widget">
 						<ul>
 							<li><a href="#">Chrome</a></li>
@@ -247,23 +198,9 @@
 							<li><a href="#">Website</a></li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
 				<!-- /tags -->
 				
-				<!-- archive -->
-				<div class="aside-widget">
-					<div class="section-title">
-						<h2>Archive</h2>
-					</div>
-					<div class="archive-widget">
-						<ul>
-							<li><a href="#">January 2018</a></li>
-							<li><a href="#">Febuary 2018</a></li>
-							<li><a href="#">March 2018</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- /archive -->
 			</div>
 			<!-- /aside -->
 		</div>
