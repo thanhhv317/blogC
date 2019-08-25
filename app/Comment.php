@@ -60,6 +60,7 @@ class Comment extends Model
     {
         return $this->where('post_id', '=', $post_id)
             ->where('status', '=', 1)
+            ->orderBy('created_at')
             ->get();
     }
 
