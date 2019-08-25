@@ -25,15 +25,20 @@ class ProfileController extends Controller
     	$facebook	 = $request->facebook;
     	$address 	 = $request->address;
     	$information = $request->information;
+    	$code 		 = $request->code;
 
     	$flag = (new Profile)->getData($user_id);
 		
 		if (is_null($flag)) {
-			if ($image = $request->file('fImage')) {
-	    		$file_name = $image->getClientOriginalName();
-	        	$image->move(public_path('/uploads/users'), $file_name);
-	    		$profile = (new Profile)->createData($user_id, $address, $facebook, $file_name, $information);
-	    	}
+			if ($code == "notonlyblog") {
+				if ($image = $request->file('fImage')) {
+		    		$file_name = $image->getClientOriginalName();
+		        	$image->move(public_path('/uploads/users'), $file_name);
+		    		$profile = (new Profile)->createData($user_id, $address, $facebook, $file_name, $information);
+		    	}
+		    } else {
+		    	return redirect()->back()->with('error','Authentication code incorrect!');
+		    }
 		} else {
 			if ($image = $request->file('fImage')) {
 	    		$file_name = $image->getClientOriginalName();

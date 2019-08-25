@@ -155,10 +155,10 @@ class PostController extends Controller
     		$id = $request->post_id;
     		DB::beginTransaction();
     		try {
-    			$post 		= (new Post)->deleteData($id);
-    			$image_name = (new Image)->deleteData($id);
+    			$post 		 = (new Post())->deleteData($id);
+    			$image_name  = (new Image())->deleteData($id);
     			$this->delImageAtHost($image_name->image);
-
+                $post_status = (new PostStatus())->deletePostStatus($id);
     			DB::commit();
             	return 1;
     		} catch (Exception $e) {

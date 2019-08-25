@@ -138,7 +138,9 @@ class Post extends Model
 
     public function getTotalByCategory()
     {
-        $caculate = $this->select('category_id',DB::raw('count(*) AS total'))
+        $caculate = $this->join('post_statuses', 'post_statuses.post_id', 'posts.id')
+                    ->select('category_id',DB::raw('count(*) AS total'))
+                    ->where('post_statuses.status', '=', 1)
                     ->groupBy('category_id');
 
         return DB::table('categories')->joinSub($caculate, 'caculate', function($join) {

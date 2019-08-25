@@ -13,7 +13,14 @@
   </ol>
 </section>
 
-@include('admin.blocks.error')
+@if ($message = Session::get('error'))
+<div class="container">
+  <div class="alert alert-warning alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button> 
+    <strong>{{ $message }}</strong>
+  </div>
+</div>
+@endif
 
 <section class="content">
   <div class="row">
@@ -38,6 +45,10 @@
                 <div class="col-md-8">
                   <div class="card-body">
                   <div class="box-body">
+                    <div class="form-group">
+                      <label>Verification codes</label>
+                      <input type="text" class="form-control" placeholder="Enter verification codes"  name="code">
+                    </div>
                     <div class="form-group">
                       <label>Name</label>
                       <input type="text" class="form-control" placeholder="Enter name" required="" name="name" value="{{ (isset($profile->name)) ? $profile->name : ''}}">
